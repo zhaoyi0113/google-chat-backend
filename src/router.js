@@ -12,7 +12,7 @@ const FRONTEND_URL = process.env.DEV
   ? 'http://localhost:8082'
 	: 'https://google-chat-frontend.herokuapp.com';
 	
-const BACKEND_URL = process.env.DEV? `http://localhost` : `https://google-chat-backend.herokuapp.com/api/v0/`;
+const BACKEND_URL = process.env.DEV? `http://localhost` : `https://google-chat-backend.herokuapp.com`;
 const SOCKET_PORT = process.env.DEV? `:${PORT}` : '';
 
 router.post('/login', (req, res) => {
