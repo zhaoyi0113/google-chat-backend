@@ -5,11 +5,15 @@ const querystring = require('querystring');
 const url = require('url');
 const {getAuthenticatedUrl, oAuth2Client} = require('./google_auth');
 
+const PORT = process.env.PORT || 3100;
 const router = express.Router();
 
 const FRONTEND_URL = process.env.DEV
   ? 'http://localhost:8082'
-  : 'https://google-chat-frontend.herokuapp.com';
+	: 'https://google-chat-frontend.herokuapp.com';
+	
+const BACKEND_URL = process.env.DEV? `http://localhost` : `https://google-chat-backend.herokuapp.com/api/v0/users`;
+const SOCKET_PORT = PORT;
 
 router.get('/users', (req, res) => {
   res.send({user: 'hello'});
@@ -25,12 +29,10 @@ router.post('/login', (req, res) => {
 
 router.get('/authenticate', async (req, res) => {
   const params = querystring.parse(url.parse(req.url).query);
-  console.log('params=', params.code);
   const r = await oAuth2Client.getToken(params.code);
 	// Make sure to set the credentials on the OAuth2 client.
-	console.log('get token ', r.tokens);
   oAuth2Client.setCredentials(r.tokens);
-  res.writeHead(302, {Location: `${FRONTEND_URL}/#/chat/?token=${r.tokens.access_token}`});
+  res.writeHead(302, {Location: `${FRONTEND_URL}/#/chat/?token=${r.tokens.access_token}&url=${BACKEND_URL}:${SOCKET_PORT}`});
   res.end();
 });
 
