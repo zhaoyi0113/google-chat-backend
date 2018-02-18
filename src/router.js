@@ -3,7 +3,7 @@ const express = require('express');
 const querystring = require('querystring');
 
 const url = require('url');
-const {getAuthenticatedUrl, oAuth2Client} = require('./google_auth');
+const {getAuthenticatedUrl, getToken} = require('./google_auth');
 
 const PORT = process.env.PORT || 3100;
 const router = express.Router();
@@ -29,10 +29,8 @@ router.post('/login', (req, res) => {
 
 router.get('/authenticate', async (req, res) => {
   const params = querystring.parse(url.parse(req.url).query);
-  const r = await oAuth2Client.getToken(params.code);
-	// Make sure to set the credentials on the OAuth2 client.
-  oAuth2Client.setCredentials(r.tokens);
-  res.writeHead(302, {Location: `${FRONTEND_URL}/#/chat/?token=${r.tokens.access_token}&url=${BACKEND_URL}:${SOCKET_PORT}`});
+  const tokens = await getToken(params.code);
+  res.writeHead(302, {Location: `${FRONTEND_URL}/#/chat/?token=${tokens.token}&url=${BACKEND_URL}:${SOCKET_PORT}&username=${tokens.user.name}`});
   res.end();
 });
 
