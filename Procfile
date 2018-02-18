@@ -1,2 +1,1 @@
-backend: node backend/src/index.js
-frontend: cd frontend; yarn start
+backend: npm run start
