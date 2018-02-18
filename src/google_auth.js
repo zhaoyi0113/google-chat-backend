@@ -35,7 +35,7 @@ const getToken = async code => {
   console.log('data:', data);
   const userProfile = JSON.parse(data);
   userCache[r.tokens.access_token] = userProfile;
-  return {token: r.tokens, user: userProfile};
+  return {token: r.tokens.access_token, user: userProfile};
 };
 
 const getUser = token => userCache[token];
