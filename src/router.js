@@ -15,10 +15,6 @@ const FRONTEND_URL = process.env.DEV
 const BACKEND_URL = process.env.DEV? `http://localhost` : `https://google-chat-backend.herokuapp.com/api/v0/users`;
 const SOCKET_PORT = PORT;
 
-router.get('/users', (req, res) => {
-  res.send({user: 'hello'});
-});
-
 router.post('/login', (req, res) => {
   const url = getAuthenticatedUrl();
   console.log('login url', url);
