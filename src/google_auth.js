@@ -4,12 +4,13 @@ const url = require('url');
 const querystring = require('querystring');
 const keys = require('./keys.json');
 
+const oAuth2Client = new OAuth2Client(
+	keys.web.client_id,
+	keys.web.client_secret,
+	keys.web.redirect_uris[0]
+);
+
 const getAuthenticatedUrl = () => {
-	const oAuth2Client = new OAuth2Client(
-		keys.web.client_id,
-		keys.web.client_secret,
-		keys.web.redirect_uris[0]
-	);
 
 	// Generate the url that will be used for the consent dialog.
 	const authorizeUrl = oAuth2Client.generateAuthUrl({
@@ -20,5 +21,5 @@ const getAuthenticatedUrl = () => {
 };
 
 module.exports = {
-	getAuthenticatedUrl
+	getAuthenticatedUrl, oAuth2Client
 };
