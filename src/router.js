@@ -25,7 +25,8 @@ router.post('/login', (req, res) => {
 
 router.get('/authenticate', async (req, res) => {
   const params = querystring.parse(url.parse(req.url).query);
-  const tokens = await getToken(params.code);
+	const tokens = await getToken(params.code);
+	console.log('authenticate:', BACKEND_URL, process.env.DEV);
   res.writeHead(302, {Location: `${FRONTEND_URL}/#/chat/?token=${tokens.token}&url=${BACKEND_URL}${SOCKET_PORT}&username=${tokens.user.name}`});
   res.end();
 });
