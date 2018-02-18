@@ -1,0 +1,18 @@
+{
+	"web": {
+		"client_id": "608655544011-j4g4lp9ns9mtkcp3jsvrpfp1fv2b8vun.apps.googleusercontent.com",
+		"project_id": "test-f3fc7",
+		"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+		"token_uri": "https://accounts.google.com/o/oauth2/token",
+		"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+		"client_secret": "orYzqx5GPdHl34nAu1h8W1Qu",
+		"redirect_uris": [
+			"http://localhost:3100/api/v0/authenticate"
+		],
+		"javascript_origins": [
+			"http://localhost",
+			"http://localhost:5000",
+			"https://test-f3fc7.firebaseapp.com"
+		]
+	}
+}
