@@ -12,7 +12,7 @@ const FRONTEND_URL = process.env.DEV
   ? 'http://localhost:8082'
 	: 'https://google-chat-frontend.herokuapp.com';
 	
-const BACKEND_URL = process.env.DEV? `http://localhost` : `https://google-chat-backend.herokuapp.com/api/v0/users`;
+const BACKEND_URL = process.env.DEV? `http://localhost` : `https://google-chat-backend.herokuapp.com/api/v0/`;
 const SOCKET_PORT = process.env.DEV? `:${PORT}` : '';
 
 router.post('/login', (req, res) => {
@@ -26,7 +26,6 @@ router.post('/login', (req, res) => {
 router.get('/authenticate', async (req, res) => {
   const params = querystring.parse(url.parse(req.url).query);
 	const tokens = await getToken(params.code);
-	console.log('authenticate:', BACKEND_URL, process.env.DEV);
   res.writeHead(302, {Location: `${FRONTEND_URL}/#/chat/?token=${tokens.token}&url=${BACKEND_URL}${SOCKET_PORT}&username=${tokens.user.name}`});
   res.end();
 });
