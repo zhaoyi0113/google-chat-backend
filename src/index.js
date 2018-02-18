@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const {router} = require('./router');
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
@@ -15,7 +16,7 @@ const baseUrl = '/api/v0/';
 app.use(baseUrl, router);
 
 app
-  .listen(3100, () => {
-    console.log('server is listen on 3100');
+  .listen(PORT, () => {
+    console.log(`server is listen on ${PORT}`);
   })
   .on('error', err => console.log(err));
